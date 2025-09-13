@@ -13,7 +13,12 @@
       "removeComments": false,
       "jsx": "react",
       "outDir": "dist",
-      "allowSyntheticDefaultImports": true
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "forceConsistentCasingInFileNames": true,
+      "noFallthroughCasesInSwitch": true,
+      "skipLibCheck": true,
+      "isolatedModules": true
   },
   "exclude": [
       "node_modules"

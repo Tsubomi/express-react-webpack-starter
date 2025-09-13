@@ -14,13 +14,15 @@ export class App extends React.Component<AppProps, AppState> {
     constructor(props: AppProps) {
         super(props);
         this.state = {
-            time: null
+            time: ''
         }
     }
-    
+
     componentDidMount() {
-        this.getTime();
-        setInterval(this.getTime, 2000);
+        void this.getTime();
+        setInterval(() => {
+            void this.getTime()
+        }, 2000);
     }
 
     render() {
@@ -40,6 +42,9 @@ export class App extends React.Component<AppProps, AppState> {
 
 export function start() {
     const rootElem = document.getElementById('main');
+    if (!rootElem) {
+        throw new Error("Root element with id 'main' not found.");
+    }
     const root = createRoot(rootElem);
     root.render(<App name="Hello World" />);
 }

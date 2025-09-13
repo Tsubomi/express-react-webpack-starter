@@ -1,8 +1,13 @@
-# Express React Webpack starter
-A starter Webpack 4 configuration for basic projects with Express and React.
+# Regina's In-Browser File Explorer
+Frontend only filebrowser for showcasing my thought process and code quality.
 
 ## Features
-- Build single page web apps with typescript.
+- Select/Deselect a file/directory
+- Create/Remove a new file/directory
+- Expand/Collapse a directory
+- Known file extensions will have an associated icon
+- Responsive design
+- File/directory info
 
 ## Dependencies
 - Install `node`
