@@ -354,14 +354,14 @@ export const FileExplorerProvider: React.FC<{children: ReactNode}> = ({ children
   }), [items, addItem, deleteItem]);
 
   return (
-    <ItemsContext.Provider value={itemsValue}>
-      <SelectionContext.Provider
+    <ItemsContext value={itemsValue}>
+      <SelectionContext
         value={{
           ...selectionState,
           selectItem
         }}
       >
-        <UIContext.Provider
+        <UIContext
           value={{
             ...uiState,
             openNewItemDialog,
@@ -370,8 +370,8 @@ export const FileExplorerProvider: React.FC<{children: ReactNode}> = ({ children
           }}
         >
           {children}
-        </UIContext.Provider>
-      </SelectionContext.Provider>
-    </ItemsContext.Provider>
+        </UIContext>
+      </SelectionContext>
+    </ItemsContext>
   );
 };

@@ -16,9 +16,9 @@ export function ExplorerControls({
 
   return (
     <div className="explorer-controls grid grid-cols-3 gap-2">
-      <button className="rounded bg-green-500 px-3 py-1.5 text-white" onClick={() => onOpenFileDialog()}>Add Item</button>
-      {showDeleteItemButton && <button className="rounded bg-red-500 px-3 py-1.5 text-white" onClick={onDeleteItem}>Delete Item</button>}
-      <button className="rounded bg-blue-500 px-3 py-1.5 text-white col-start-3" onClick={() => onStartDemo()}>Demo</button>
+      <button className="rounded bg-green-300 px-3 py-1.5 text-black" onClick={() => onOpenFileDialog()}>Add Item</button>
+      {showDeleteItemButton && <button className="rounded bg-red-300 px-3 py-1.5 text-black" onClick={onDeleteItem}>Delete Item</button>}
+      <button className="rounded bg-blue-300 px-3 py-1.5 text-black col-start-3" onClick={() => onStartDemo()}>Demo</button>
     </div>
   );
 }
