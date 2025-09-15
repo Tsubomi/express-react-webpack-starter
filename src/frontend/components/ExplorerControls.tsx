@@ -1,0 +1,24 @@
+import React from "react";
+
+interface ExplorerControlsProps {
+  showDeleteItemButton?: boolean;
+  onDeleteItem: () => void;
+  onOpenFileDialog: () => void;
+  onStartDemo: () => void;
+}
+
+export function ExplorerControls({
+  showDeleteItemButton,
+  onDeleteItem,
+  onOpenFileDialog,
+  onStartDemo
+}: ExplorerControlsProps) {
+
+  return (
+    <div className="explorer-controls grid grid-cols-3 gap-2">
+      <button className="rounded bg-green-500 px-3 py-1.5 text-white" onClick={() => onOpenFileDialog()}>Add Item</button>
+      {showDeleteItemButton && <button className="rounded bg-red-500 px-3 py-1.5 text-white" onClick={onDeleteItem}>Delete Item</button>}
+      <button className="rounded bg-blue-500 px-3 py-1.5 text-white col-start-3" onClick={() => onStartDemo()}>Demo</button>
+    </div>
+  );
+}

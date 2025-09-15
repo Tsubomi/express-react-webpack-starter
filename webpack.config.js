@@ -28,6 +28,10 @@ const moduleConfig = (tscOptions = {}) => ({
                     }
                 }
             ]
+        },
+        {
+            test: /\.css$/i,
+            use: ["style-loader", "css-loader", "postcss-loader"],
         }
     ]
 });
@@ -55,21 +59,22 @@ const frontendBuild = (name, entryFile, outputFile) => ({
     devServer: {
         historyApiFallback: true, // replace 404 page with index.html for client-side routing
         port: 8000,
-        proxy: {
-            '/api': {
+        proxy: [
+            {
+                context: ['/api'],
                 target: 'http://localhost:8080',
                 secure: false
             }
-        }
+        ]
     },
     // When importing a module whose path matches one of the following, just
     // assume a corresponding global variable exists and use that instead.
     // This is important because it allows to avoid bundling all of your
     // dependencies, which allows browsers to cache those libraries between builds.
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },
+    // externals: {
+    //     "react": "React",
+    //     "react-dom": "ReactDOM"
+    // },
     plugins: [htmlPlugin]
 });
 

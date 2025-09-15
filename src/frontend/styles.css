@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* Custom styles can be added below */
+
+/* Reset some basic styles for better cross-browser consistency */
+html {
+    margin: 0;
+    padding: 0;
+}
