@@ -20,7 +20,7 @@ function getItemsToAdd (maxItems: number) {
         const itemName = addDirectory ? `Directory ${uuid}` : `File ${uuid}.${randomExtension}`;
         let itemToAdd: FileListMapItem;
         if (addDirectory) {
-            numItemsToAdd = Math.floor(Math.random() * (maxItems - numItems + 1)) + 1;
+            // numItemsToAdd = Math.floor(Math.random() * (maxItems - numItems + 1)) + 1;
             itemToAdd = { id: uuid, name: itemName, type: 'directory', files: getItemsToAdd(numItemsToAdd) };
             numItemsToAdd++; // +1 for the directory itself
         } else {

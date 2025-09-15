@@ -47,6 +47,8 @@ export default function File({id, itemKey = '', name, parentKeys = '', isSelecte
   const fileExtension = name.split('.').pop()?.toLowerCase();
 
   // Comprehensive icon mapping based on file extension
+  // @todo - consider using a sprite instead for performance to minimize the
+  // number of inline svgs rendered when displaying a large number of files
   const iconMap: Record<string, React.ReactNode> = {
     // Documents
     'txt': <FileTxtIcon size={16} />,

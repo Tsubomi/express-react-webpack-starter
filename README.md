@@ -8,6 +8,17 @@ Frontend only filebrowser for showcasing my thought process and code quality.
 - Known file extensions will have an associated icon
 - Responsive design
 
+### Ideas I'd like do/implement
+- keyboard interaction and shortcut commands
+- svg icon sprite or icon font for reducing the number of inline svg icons rendered when there are a large number of files
+- unit tests
+- accessibility audit
+- better state management for the complex state/embedded directories
+    - Consider a more granular state structure or use virtualization for large directories
+    - Currently the Directory component will re-render whenever its files prop changes, even if only a single nested file changes.
+    - consider storing currentDirectoryKeyPath as an array of keys instead of a comma-separated string for easier manipulation.
+    - context file is a bit long, consider splitting it up so that it's smaller and easier to digest
+
 ## Dependencies
 1. Install `node`
     - Use NVM (https://github.com/nvm-sh/nvm): `nvm install && nvm use`
