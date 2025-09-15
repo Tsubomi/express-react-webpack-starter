@@ -142,8 +142,6 @@ export const FileExplorerProvider: React.FC<{children: ReactNode}> = ({ children
   }, []);
 
   const deleteItem = useCallback((key: string, parentPath: string[]) => {
-    console.log('Deleting item with key:', key, 'Path:', parentPath);
-
     setItems(prevItems => {
       // First, check if the item to delete is a directory or file
       let itemToDelete = null;
@@ -152,8 +150,6 @@ export const FileExplorerProvider: React.FC<{children: ReactNode}> = ({ children
       if (parentPath.length > 0 && parentPath[parentPath.length - 1] === key) {
         parentPath = parentPath.slice(0, -1); // Remove last element to get parent path
       }
-
-      console.log('Adjusted parent path for deletion:', parentPath);
 
       // If we're at root level
       if (parentPath.length === 0) {
@@ -197,15 +193,11 @@ export const FileExplorerProvider: React.FC<{children: ReactNode}> = ({ children
         parentPath.slice(0, parentPath.length) // Full path to containing directory
       );
 
-      console.log('Parent directory:', parentDir ? parentDir.name : 'Not found');
-
       if (parentDir && parentDir.type === 'directory') {
         // Check if the key exists in this directory
         itemToDelete = parentDir.files.get(key);
 
         if (itemToDelete) {
-          console.log('Found item to delete:', itemToDelete.name, 'Type:', itemToDelete.type);
-
           // Create new files Map without the item
           const updatedFiles = new Map(parentDir.files);
           updatedFiles.delete(key);
@@ -273,11 +265,7 @@ export const FileExplorerProvider: React.FC<{children: ReactNode}> = ({ children
               parentKey
             );
           }
-        } else {
-          console.error('Item not found with key:', key);
         }
-      } else {
-        console.error('Parent directory not found for path:', parentPath);
       }
 
       return newItems;
