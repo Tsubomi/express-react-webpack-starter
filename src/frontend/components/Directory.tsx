@@ -14,7 +14,6 @@ type DirectoryItemProps = Omit<FileListMapDirectory, 'type'> & {
     isSelected?: boolean;
     itemKey?: string;
     parentKeys?: string;
-    selectedItemId?: string | null;
     onSelectItem: (id: string, key: string, parentKeys: string) => void;
 };
 
@@ -67,7 +66,6 @@ function DirectoryComponent({
                       directoryId={id}
                       files={files}
                       parentKeys={parentKeys}
-                      selectedItemId={selectedItemId}
                       onSelectItem={onSelectItem}
                     />
                 </div>

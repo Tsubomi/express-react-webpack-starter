@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import getDemoItems from '../demoStub';
@@ -361,8 +361,12 @@ export const FileExplorerProvider: React.FC<{children: ReactNode}> = ({ children
     setUIState(prev => ({ ...prev, showDeleteItemButton: false }));
   }, []);
 
+  const itemsValue = useMemo(() => ({
+    items, setItems, addItem, deleteItem
+  }), [items, addItem, deleteItem]);
+
   return (
-    <ItemsContext.Provider value={{ items, setItems, addItem, deleteItem }}>
+    <ItemsContext.Provider value={itemsValue}>
       <SelectionContext.Provider
         value={{
           ...selectionState,

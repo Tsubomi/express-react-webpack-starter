@@ -9,7 +9,6 @@ import { ExplorerControls } from "./ExplorerControls";
 export const RootDirectoryId = 'root';
 
 function FileExplorerContent() {
-    const { items } = useItems();
     const { selectedItemId, selectItem, currentDirectoryKeyPath, selectedItemKey, currentDirectory } = useSelection();
     const {
         isNewItemDialogOpen,
@@ -17,7 +16,7 @@ function FileExplorerContent() {
         closeNewItemDialog,
         startDemo
     } = useFileExplorerUI();
-    const { deleteItem, addItem } = useItems();
+    const { items, deleteItem, addItem } = useItems();
 
     // Use selectedItemId directly for button visibility instead of context's showDeleteItemButton
     const isDeleteButtonVisible = Boolean(selectedItemId);
@@ -71,7 +70,6 @@ function FileExplorerContent() {
                     <Directory
                         id={RootDirectoryId}
                         name="Root Directory"
-                        selectedItemId={selectedItemId}
                         onSelectItem={selectItem}
                         files={items}
                     />
