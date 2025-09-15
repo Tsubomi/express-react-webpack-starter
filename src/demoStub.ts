@@ -1,58 +1,46 @@
 import { v4 as uuidv4 } from 'uuid';
 
-function getFilesData (count: number) {
-    const files = [];
-    for (let i = 1; i <= count; i++) {
-        files.push({ id: `file0${i}.txt`, name: `file${i}.txt`, type: 'file' });
+import type { FileListMap, FileListMapItem } from './types';
+
+function getItemsToAdd (maxItems: number) {
+    let numItems = 0;
+
+    const demoItems: FileListMap = new Map();
+
+    while (numItems < maxItems) {
+        // Generate a random number between 1 and maxItems - numItems
+        let numItemsToAdd = 1;
+
+        // Randomly decide to add files or a directory
+        const addDirectory = Math.random() < 0.3; // 30% chance to add a directory
+        const uuid = uuidv4();
+        // Randomly generate a file extension for files
+        const fileExtensions = ['exe', 'txt', 'md', 'js', 'jpg', 'ts', 'tsx', 'json', 'html'];
+        const randomExtension = fileExtensions[Math.floor(Math.random() * fileExtensions.length)];
+        const itemName = addDirectory ? `Directory ${uuid}` : `File ${uuid}.${randomExtension}`;
+        let itemToAdd: FileListMapItem;
+        if (addDirectory) {
+            numItemsToAdd = Math.floor(Math.random() * (maxItems - numItems + 1)) + 1;
+            itemToAdd = { id: uuid, name: itemName, type: 'directory', files: getItemsToAdd(numItemsToAdd) };
+            numItemsToAdd++; // +1 for the directory itself
+        } else {
+            itemToAdd = { id: uuid, name: itemName, type: 'file' };
+        }
+
+        demoItems.set(itemName, itemToAdd);
+        numItems += numItemsToAdd;
     }
-    return files;
-};
 
-export type DemoFileData = {
-    name: string;
+    return demoItems;
 }
-
-export type DemoDirectoryData = {
-    name: string;
-    files?: DemoDirectoryFileListItem[];
-};
-
-export type DemoDirectoryFileListItem = DemoFileData | DemoDirectoryData;
 
 /**
  * Return an array of demo items to add to FileExplorer items through startDemo
  * and addNewItem functions
  *
- * @return  DemoDirectoryFileListItem[]
+ * @return  ListItemMap
  */
 export default function getDemoItems() {
-    const maxItems = 50;
-    let numItems = 0;
-
-    let demoItems: DemoDirectoryFileListItem[] = [];
-
-    while (numItems < maxItems) {
-        // Generate a random number between 1 and maxItems - numItems
-        const numItemsToAdd = Math.floor(Math.random() * (maxItems - numItems + 1)) + 1;
-
-        // Randomly decide to add files or a directory
-        const addDirectory = Math.random() < 0.3; // 30% chance to add a directory
-
-        if (addDirectory) {
-            // generate a directory with numItemsToAdd files
-            const dirId = `dir-${uuidv4()}`;
-            const dirName = `Directory ${dirId.substring(0, 8)}`;
-            const filesInDir = getFilesData(numItemsToAdd);
-
-            demoItems.push({ name: dirName, files: filesInDir });
-
-            numItems += numItemsToAdd + 1; // +1 for the directory itself
-        } else {
-            demoItems = [...demoItems, ...getFilesData(numItemsToAdd)];
-            // generate numItemsToAdd files
-            numItems += numItemsToAdd;
-        }
-    }
-
-    return demoItems;
+    const maxItems = 10000;
+    return getItemsToAdd(maxItems);
 }
