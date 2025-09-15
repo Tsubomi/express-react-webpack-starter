@@ -14,6 +14,11 @@ type ItemsContextType = {
   deleteItem: (key: string, parentPath: string[]) => void;
 };
 
+/**
+ * @todo - Consider a more granular state structure or use virtualization for
+ * large directories. Currently the Directory component will re-render whenever
+ * its files prop changes, even if only a single nested file changes.
+ */
 const ItemsContext = createContext<ItemsContextType>({
   items: new Map(),
   setItems: () => {},
@@ -22,6 +27,10 @@ const ItemsContext = createContext<ItemsContextType>({
 });
 
 // Selection Context
+/**
+ * @todo - consider storing currentDirectoryKeyPath as an array of keys
+ * instead of a comma-separated string for easier manipulation.
+ */
 type SelectionContextType = {
   selectedItemId: string | null;
   selectedItemKey: string | null;
